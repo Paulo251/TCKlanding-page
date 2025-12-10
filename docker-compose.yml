@@ -1,0 +1,16 @@
+services:
+  reactapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      # Força o watch funcionar dentro do container (hot reload)
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=200
+      - VITE_FORCE_HMR=true
+    command: npm run dev -- --host
